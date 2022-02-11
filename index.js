@@ -118,6 +118,10 @@ app.get("/upload", uploadMiddleware, (req, res, next) => {
 });
 
 app.get("/", async (req, res, next) => {
+  res.sendFile(path.join(__dirname, "docs.html"));
+});
+
+app.get("/all-images", async (req, res, next) => {
   const files = fs.readdirSync("./public");
   res.json(
     files.map((file) => ({ url: `http://localhost:5000/public/${file}` }))
