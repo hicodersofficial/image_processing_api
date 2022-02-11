@@ -43,3 +43,9 @@ http://localhost:5000/public/{filename}?q=90&s=200&fit=inside
 <div>
 <img src="./docs/original-img2.jpg"width="50%" ><img src="./docs/original-img1-com.jpg"width="50%">
 </div>
+
+<br />
+
+## [Follow Instagram](https://www.instagram.com/hi.coders/)
+
+## **Thank You! ❣️**
