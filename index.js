@@ -95,6 +95,13 @@ app.use("/public/:filename", async (req, res, next) => {
   }
 });
 
+app.get("/all-images", async (req, res, next) => {
+  const files = fs.readdirSync("./public");
+  res.json(
+    files.map((file) => ({ url: `http://localhost:5000/public/${file}` }))
+  );
+});
+
 const uploadMiddleware = multer({
   limits: 10_000_000,
   storage: multer.diskStorage({
@@ -118,15 +125,11 @@ app.get("/upload", uploadMiddleware, (req, res, next) => {
 });
 
 app.get("/", async (req, res, next) => {
-  res.sendFile(path.join(__dirname, "docs.html"));
-});
-
-app.get("/all-images", async (req, res, next) => {
-  const files = fs.readdirSync("./public");
-  res.json(
-    files.map((file) => ({ url: `http://localhost:5000/public/${file}` }))
-  );
+  res.sendFile(path.join(__dirname, "./docs/docs.html"));
 });
 
 const port = 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+  console.log(`http://localhost:${port}`);
+});
