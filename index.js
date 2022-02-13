@@ -96,10 +96,18 @@ app.use("/public/:filename", async (req, res, next) => {
 });
 
 app.get("/all-images", async (req, res, next) => {
-  const files = fs.readdirSync("./public");
-  res.json(
-    files.map((file) => ({ url: `http://localhost:5000/public/${file}` }))
-  );
+  const files = fs
+    .readdirSync("./public")
+    .map((file) => ({ url: `http://localhost:5000/public/${file}` }));
+  const response =
+    files.length > 0
+      ? files
+      : {
+          message:
+            "No images found in public directory. Navigate to /upload to upload images images.",
+          url: "http://localhost:5000/upload",
+        };
+  res.json(response);
 });
 
 const uploadMiddleware = multer({
